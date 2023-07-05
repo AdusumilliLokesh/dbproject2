@@ -125,9 +125,23 @@ public class LinHashMap <K, V>
     public Set <Map.Entry <K, V>> entrySet ()
     {
         var enSet = new HashSet <Map.Entry <K, V>> ();
-
         //  T O   B E   I M P L E M E N T E D
-            
+        // Iterate through each bucket in the hash table
+        for (int i = 0; i < hTable.size(); i++) {
+            // Get the bucket at the current index
+            Bucket bucket = hTable.get(i);
+            // Iterate through the bucket chain at this position in the hash table
+            while (bucket != null) {
+                // Iterate through the key-value pairs stored in this bucket
+                for (int j = 0; j < bucket.nKeys; j++) {
+                    // Create a new entry using the key-value pair and add it to the set
+                    enSet.add(new AbstractMap.SimpleEntry<K, V>(bucket.key[j], bucket.value[j]));
+                }// for
+                // Move to the next bucket in the chain
+                bucket = bucket.next;
+            }// while
+        }// for
+        // Return the set of entries
         return enSet;
     } // entrySet
 

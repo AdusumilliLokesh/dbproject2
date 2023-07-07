@@ -167,7 +167,7 @@ public class LinHashMap <K, V>
      */
     public V put (K key, V value)
     {
-        var i    = h (key);                                                  // hash to i-th bucket chain
+        var i = Math.abs(h(key));                                                // hash to i-th bucket chain
         var bh   = hTable.get (i);                                           // start with home bucket
         var oldV = find (key, bh, false);                                    // find old value associated with key
         out.println ("LinearHashMap.put: key = " + key + ", h() = " + i + ", value = " + value);

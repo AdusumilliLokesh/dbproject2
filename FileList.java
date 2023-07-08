@@ -1,4 +1,3 @@
-
 /*******************************************************************************
  * @file  FileList.java
  *
@@ -15,8 +14,8 @@ import java.util.*;
  * tuple be packed into a fixed length byte array.
  */
 public class FileList
-       extends AbstractList <Comparable []>
-       implements List <Comparable []>, RandomAccess
+        extends AbstractList <Comparable []>
+        implements List <Comparable []>, RandomAccess
 {
     /** File extension for data files.
      */
@@ -72,11 +71,21 @@ public class FileList
             return false;
         } // if
 
-             //-----------------\\
-            // TO BE IMPLEMENTED \\
-           //---------------------\\
+        //-----------------\\
+        // TO BE IMPLEMENTED \\
+        //---------------------\\
+        try {
+            file.write(record);
+        } catch (IOException e) {
+            out.println("FileList.add: write failed");
+            return false;
+        }
+
+        // Increment the number of records.
+        nRecords++;
 
         return true;
+
     } // add
 
     /***************************************************************************
@@ -89,12 +98,31 @@ public class FileList
     {
         var record = new byte [recordSize];
 
-             //-----------------\\
-            // TO BE IMPLEMENTED \\
-           //---------------------\\
+        //-----------------\\
+        // TO BE IMPLEMENTED \\
+        //---------------------\\
 
-        return null;   // FIX: table.unpack (record);
-    } // get
+        // Seek to the i-th record.
+        try {
+            file.seek(i * recordSize);
+        } catch (IOException e) {
+            out.println("FileList.get: seek failed");
+            return null;
+        }
+
+        // Read the record from the file.
+        try {
+            file.read(record);
+        } catch (IOException e) {
+            out.println("FileList.get: read failed");
+            return null;
+        }
+        return null;
+        // Unpack the record into a tuple.
+        //return table.unpack(record);
+    }
+
+     // get
 
     /***************************************************************************
      * Return the size of the file list in terms of the number of tuples/records.
@@ -118,4 +146,3 @@ public class FileList
     } // close
 
 } // FileList class
-

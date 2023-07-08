@@ -69,11 +69,7 @@ public class FileList
         if (record.length != recordSize) {
             out.println ("FileList.add: wrong record size " + record.length);
             return false;
-        } // if
-
-        //-----------------\\
-        // TO BE IMPLEMENTED \\
-        //---------------------\\
+        } 
         try {
             file.write(record);
         } catch (IOException e) {
@@ -97,10 +93,6 @@ public class FileList
     public Comparable [] get (int i)
     {
         var record = new byte [recordSize];
-
-        //-----------------\\
-        // TO BE IMPLEMENTED \\
-        //---------------------\\
 
         // Seek to the i-th record.
         try {
